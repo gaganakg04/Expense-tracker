@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,7 +23,7 @@
             margin: 0 auto;
             background: white;
             border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
             overflow: hidden;
         }
 
@@ -81,8 +80,7 @@
             margin-bottom: 5px;
         }
 
-        input,
-        select {
+        input, select {
             padding: 12px;
             border: 2px solid #e0e0e0;
             border-radius: 8px;
@@ -90,8 +88,7 @@
             transition: border-color 0.3s ease;
         }
 
-        input:focus,
-        select:focus {
+        input:focus, select:focus {
             outline: none;
             border-color: #667eea;
         }
@@ -150,7 +147,7 @@
             border-radius: 10px;
             padding: 15px;
             margin-bottom: 15px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -204,7 +201,7 @@
             .form-group {
                 grid-template-columns: 1fr;
             }
-
+            
             .stats-section {
                 grid-template-columns: 1fr;
             }
@@ -217,7 +214,6 @@
         }
     </style>
 </head>
-
 <body>
     <div class="container">
         <div class="header">
@@ -233,8 +229,7 @@
                     <div class="form-group">
                         <div class="input-wrapper">
                             <label for="description">Description</label>
-                            <input type="text" id="description" name="description" required
-                                placeholder="What did you spend on?">
+                            <input type="text" id="description" name="description" required placeholder="What did you spend on?">
                         </div>
                         <div class="input-wrapper">
                             <label for="amount">Amount</label>
@@ -247,7 +242,7 @@
                                 <option value="Food">🍔 Food</option>
                                 <option value="Transportation">🚗 Transportation</option>
                                 <option value="Entertainment">🎬 Entertainment</option>
-                                <option value="Shopping">🛍 Shopping</option>
+                                <option value="Shopping">🛍️ Shopping</option>
                                 <option value="Bills">💡 Bills</option>
                                 <option value="Healthcare">🏥 Healthcare</option>
                                 <option value="Other">📦 Other</option>
@@ -298,12 +293,13 @@
             }
 
             loadExpenses() {
-                const saved = JSON.parse(localStorage.getItem('expenses') || '[]');
-                return saved;
+                // Initialize with empty array - no localStorage in this environment
+                return [];
             }
 
             saveExpenses() {
-                localStorage.setItem('expenses', JSON.stringify(this.expenses));
+                // Data will persist in memory during the session
+                // In a real environment, you would use localStorage here
             }
 
             setTodayAsDefault() {
@@ -368,14 +364,14 @@
                 const count = this.expenses.length;
                 const average = count > 0 ? total / count : 0;
 
-                document.getElementById('total-expenses').textContent = $${ total.toFixed(2) };
+                document.getElementById('total-expenses').textContent = `$${total.toFixed(2)}`;
                 document.getElementById('expense-count').textContent = count;
-                document.getElementById('average-expense').textContent = $${ average.toFixed(2) };
+                document.getElementById('average-expense').textContent = `$${average.toFixed(2)}`;
             }
 
             updateExpensesList() {
                 const container = document.getElementById('expenses-list');
-
+                
                 if (this.expenses.length === 0) {
                     container.innerHTML = '<div class="no-expenses">No expenses added yet. Add your first expense above!</div>';
                     return;
@@ -399,10 +395,10 @@
 
             formatDate(dateString) {
                 const date = new Date(dateString);
-                return date.toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'short',
-                    day: 'numeric'
+                return date.toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'short', 
+                    day: 'numeric' 
                 });
             }
         }
@@ -411,5 +407,4 @@
         const tracker = new ExpenseTracker();
     </script>
 </body>
-
 </html>
